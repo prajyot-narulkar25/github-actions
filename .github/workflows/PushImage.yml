@@ -30,7 +30,7 @@ jobs:
     - run: npm ci
     - run: npm run build --if-present
 
-    - uses: push image
+    - uses: mr-smithers-excellent/docker-build-push@v
       with:
         image: prajyot25/github-actions
         registry: docker.io
