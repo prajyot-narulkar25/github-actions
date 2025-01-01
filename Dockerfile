@@ -1,17 +1,20 @@
-FROM node:16-alpine AS build
+# Use an official Node.js runtime as a base image
+FROM node:18
 
-WORKDIR /app
+# Set the working directory in the container
+WORKDIR /usr/src/app
 
-COPY . .
+# Copy package.json and package-lock.json to the container
+COPY package*.json ./
 
+# Install the application dependencies
 RUN npm install
 
-RUN npm run build
+# Copy the application code to the container
+COPY . .
 
-# Serve Application using Nginx Server
+# Expose the port the app runs on
+EXPOSE 3000
 
-FROM nginx:alpine
-
-COPY --from=build /app/dist/project-name/ /usr/share/nginx/html
-
-EXPOSE 8080
+# Define the command to run your application
+CMD ["npm", "start"]
