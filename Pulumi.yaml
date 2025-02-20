@@ -1,0 +1,10 @@
+name: s3-bucket
+runtime:
+  name: nodejs
+  options:
+    packagemanager: npm
+description: deploy a s3 bucket
+config:
+  pulumi:tags:
+    value:
+      pulumi:template: https://www.pulumi.com/ai/api/project/8e35650f-6882-4e2d-920a-2233bec34938.zip
