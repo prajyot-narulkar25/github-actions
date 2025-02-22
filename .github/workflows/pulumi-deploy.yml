@@ -75,4 +75,4 @@ jobs:
 
       # Step 8: Run Pulumi Up (Deploy)
       - name: Pulumi Up
-        run: pulumi up --yes
+        run: pulumi up --stack dev --yes
