@@ -47,7 +47,6 @@ jobs:
         run: |
           curl -fsSL https://get.pulumi.com | sh
           echo "$HOME/.pulumi/bin" >> $GITHUB_PATH
-          echo "$INFRA_DESTROY"
 
       # Step 4: Configure AWS credentials (if using AWS)
       - name: Configure AWS credentials
