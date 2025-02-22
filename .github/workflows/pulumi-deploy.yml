@@ -69,10 +69,6 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      # Step 7: Run Pulumi Preview
-      - name: Pulumi Preview
-        run: pulumi preview
-
-      # Step 8: Run Pulumi Up (Deploy)
+      # Step 7: Run Pulumi Up (Deploy)
       - name: Pulumi Up
         run: pulumi up --stack dev --yes
