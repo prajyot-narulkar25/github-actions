@@ -28,9 +28,9 @@ jobs:
       #     echo "AWS_ACCESS_KEY_ID=$(echo $AWS_CREDS | jq -r '.aws_access_key_id')" >> $GITHUB_ENV
       #     echo "AWS_SECRET_ACCESS_KEY=$(echo $AWS_CREDS | jq -r '.aws_secret_access_key')" >> $GITHUB_ENV
 
-  s3-deploy:
-    # env:
-    #   INFRA_DESTROY : ${{vars.INFRA_DESTROY || 'false'}}
+  pulumi-init:
+    env:
+      INFRA_DESTROY : ${{vars.INFRA_DESTROY || 'false'}}
     # needs: vault-secret
     runs-on: ubuntu-latest
 
@@ -69,6 +69,22 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      # Step 7: Run Pulumi Up (Deploy)
-      - name: Pulumi Up
-        run: pulumi up --stack dev --yes
+  pulumi-up:
+    if: vars.INFRA_DESTROY == 'false'
+    needs: pulumi-init
+    runs-on: ubuntu-latest
+      
+    steps:
+     # Step 7: Run Pulumi Up (Deploy)
+     - name: Pulumi Up
+       run: pulumi up --stack dev --yes
+
+  pulumi-down:
+    if: vars.INFRA_DESTROY == 'true'
+    needs: pulumi-init
+    runs-on: ubuntu-latest
+      
+    steps:
+     # Step 7: Run Pulumi Up (Deploy)
+     - name: Pulumi Down
+       run: pulumi down --stack dev --yes
