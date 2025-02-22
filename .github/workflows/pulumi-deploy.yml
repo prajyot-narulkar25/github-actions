@@ -8,7 +8,6 @@ on:
     branches:
       - pulumi-infra
   workflow_dispatch:
-
 jobs:
   # vault-secret:
   #   runs-on: ubuntu-latest
@@ -29,8 +28,6 @@ jobs:
       #     echo "AWS_SECRET_ACCESS_KEY=$(echo $AWS_CREDS | jq -r '.aws_secret_access_key')" >> $GITHUB_ENV
 
   pulumi:
-    env:
-      INFRA_DESTROY : ${{vars.INFRA_DESTROY || 'false'}}
     # needs: vault-secret
     runs-on: ubuntu-latest
 
@@ -77,5 +74,5 @@ jobs:
 
      # Step 8: Run Pulumi Down (Deprovision)
       - name: Pulumi Down
-        if: vars.INFRA_DESTROY == 'false'
+        if: vars.INFRA_DESTROY == 'true'
         run: pulumi down --stack dev --yes
