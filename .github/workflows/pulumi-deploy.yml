@@ -28,7 +28,7 @@ jobs:
       #     echo "AWS_ACCESS_KEY_ID=$(echo $AWS_CREDS | jq -r '.aws_access_key_id')" >> $GITHUB_ENV
       #     echo "AWS_SECRET_ACCESS_KEY=$(echo $AWS_CREDS | jq -r '.aws_secret_access_key')" >> $GITHUB_ENV
 
-  pulumi-init:
+  pulumi:
     env:
       INFRA_DESTROY : ${{vars.INFRA_DESTROY || 'false'}}
     # needs: vault-secret
