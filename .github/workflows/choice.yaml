@@ -16,21 +16,5 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
       - name: Print selected environment
-        run: echo ${{ github.event.inputs.environment }}
-
-      - name: Deploy to selected environment
-        run: |
-          if [ "${{ github.event.inputs.environment }}" == "staging" ]; then
-            echo "Deploying to staging..."
-            # Add your deployment commands for staging here
-          elif [ "${{ github.event.inputs.environment }}" == "production" ]; then
-            echo "Deploying to production..."
-            # Add your deployment commands for production here
-          else
-            echo "Invalid environment selected."
-            exit 1
-          fi
+        run: echo ${{ github.event.inputs }}
