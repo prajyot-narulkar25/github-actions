@@ -1,20 +1,26 @@
-name: Example Workflow with Choice
+name: Mixed inputs
 
 on:
   workflow_dispatch:
     inputs:
-      environment:
-        description: 'Select the environment to deploy to'
-        required: true
-        default: 'staging'
+      name:
         type: choice
-        options:
-          - staging
-          - production
+        description: Who to greet
+        options: 
+        - monalisa
+        - cschleiden
+      message:
+        required: true
+      use-emoji:
+        type: boolean
+        description: Include 🎉🤣 emojis
+      environment:
+        type: environment
 
 jobs:
-  deploy:
+  greet:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Print selected environment
-        run: echo ${{ github.event.inputs.environment }}
+    - name: Send greeting
+      run: echo "${{ github.event.inputs.message }} ${{ fromJSON('["", "🥳"]')[github.event.inputs.use-emoji == 'true'] }} ${{ github.event.inputs.name }}"
