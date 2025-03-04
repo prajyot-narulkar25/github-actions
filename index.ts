@@ -22,5 +22,6 @@ const publicAccessBlock = new aws.s3.BucketPublicAccessBlock("my-bucket-public-a
     restrictPublicBuckets: true,
 });
 
+
 export const bucketName = bucket.bucket;
 export const bucketArn = bucket.arn;
